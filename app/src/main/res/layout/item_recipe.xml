@@ -36,7 +36,7 @@
                 android:padding="8dp">
 
                 <TextView
-                    android:id="@+id/titleTextView"
+                    android:id="@+id/nameTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:text="Nombre de Receta"
@@ -44,10 +44,10 @@
                     android:textStyle="bold"/>
 
                 <TextView
-                    android:id="@+id/descriptionTextView"
+                    android:id="@+id/cuisineTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:text="Descripción corta de la receta"
+                    tools:text="Italian"
                     android:textSize="18sp"/>
 
                 <LinearLayout
@@ -58,7 +58,7 @@
                     android:layout_marginTop="8dp">
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/genreChip"
+                        android:id="@+id/difficulty"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:clickable="false"
@@ -66,7 +66,7 @@
                         android:textColor="@color/md_theme_onTertiary"
                         app:rippleColor="@null"
                         style="@style/Widget.Material3.Chip.Suggestion.Elevated"
-                        tools:text="Pizza"
+                        tools:text="Easy"
                         android:textSize="12dp"/>
 
                     <Space
@@ -74,13 +74,14 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"/>
 
-<!--                    <com.google.android.material.button.MaterialButton-->
-<!--                        android:id="@+id/platformButton"-->
-<!--                        style="?attr/materialIconButtonFilledStyle"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        app:icon="@drawable/ic_web"-->
-<!--                        android:clickable="false"/>-->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/cookTimeMinutes"
+                        style="?attr/materialIconButtonFilledStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:icon="@drawable/ic_timer"
+                        android:text="  25 min"
+                        android:clickable="false"/>
 
 
                 </LinearLayout>
