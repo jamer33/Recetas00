@@ -4,6 +4,10 @@ package com.example.recetas00.data
 
 import com.google.gson.annotations.SerializedName
 
+data class RecipeResponse(
+    @SerializedName("recipes") val recipes: List<Recipe>
+)
+
 data class Recipe (
     @SerializedName("id") val id: Int,
     @SerializedName("name") val name: String,

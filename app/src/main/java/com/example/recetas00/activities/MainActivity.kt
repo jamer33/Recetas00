@@ -38,23 +38,24 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        adapter = RecipeAdapter(emptyList()) { position ->
-            val recipe = adapter.items[position]
-//            Intent(this, DetailActivity::class.java)
-//            intent.putExtra(DetailActivity.EXTRA_RECIPE_ID, recipe.id)
-//            startActivity(intent)
+        adapter = RecipeAdapter(filteredRecipeList) { position ->
+            val recipe = filteredRecipeList[position]
+            val intent = Intent(this, DetailActivity::class.java)
+            intent.putExtra(DetailActivity.EXTRA_RECIPE_ID, recipe.id)
+            startActivity(intent)
         }
 
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = GridLayoutManager(this, 1)
 
+        getRecipeList()
     }
 
     fun getRecipeList() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val service = RecipeService.getInstance()
-                originalRecipeList = service.getAllRecipes()
+                originalRecipeList = service.searchRecipes().recipes
                 filteredRecipeList = originalRecipeList
                 CoroutineScope(Dispatchers.Main).launch {
                     adapter.updateItems(filteredRecipeList)

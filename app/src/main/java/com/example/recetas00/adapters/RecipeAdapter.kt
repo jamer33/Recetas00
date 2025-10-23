@@ -3,8 +3,10 @@ package com.example.recetas00.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.recetas00.R
 import com.example.recetas00.data.Recipe
 import com.example.recetas00.databinding.ItemRecipeBinding
+import com.squareup.picasso.Picasso
 
 class RecipeAdapter(
     var items: List<Recipe>,
@@ -48,6 +50,6 @@ class RecipeViewHolder(val binding: ItemRecipeBinding) : RecyclerView.ViewHolder
 //            "PC (Windows)" -> binding.platformButton.setIconResource(R.drawable.ic_desktop_windows)
 //            "Web Browser" -> binding.platformButton.setIconResource(R.drawable.ic_web)
 //        }
-//        Picasso.get().load(recipe.thumbnail).placeholder(R.drawable.bg_image_placeholder).into(binding.thumbnailImageView)
+        Picasso.get().load(recipe.image).placeholder(R.drawable.bg_image_placeholder).into(binding.thumbnailImageView)
     }
 }
