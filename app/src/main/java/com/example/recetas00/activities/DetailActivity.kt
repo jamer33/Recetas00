@@ -64,8 +64,8 @@ class DetailActivity : AppCompatActivity() {
 
     fun loadData() {
         // Basic info
-        // supportActionBar?.title = recipe.title
-        // supportActionBar?.subtitle = recipe.developer
+        supportActionBar?.title = recipe.name
+        supportActionBar?.subtitle = recipe.cuisine
         binding.titleTextView.text = recipe.name
         binding.cuisineTextView.text = recipe.cuisine
         binding.difficulty.text = recipe.difficulty
@@ -83,24 +83,12 @@ class DetailActivity : AppCompatActivity() {
             showMoreEnabled = !showMoreEnabled
         }
         binding.instructionsTextView.text = recipe.instructions.mapIndexed { index, instruction -> "${index + 1}) $instruction" }.joinToString("\n\n")
-//        binding.showMore2TextView.setOnClickListener {
-//            if (showMore2Enabled) {
-//                binding.instructionsTextView.maxLines = 5
-//                binding.showMore2TextView.text = "Ver más..."
-//            } else {
-//                binding.instructionsTextView.maxLines = Int.MAX_VALUE
-//                binding.showMore2TextView.text = "Ver menos..."
-//            }
-//            showMore2Enabled = !showMore2Enabled
-//        }
+
         binding.cardViewInstrucciones.setOnClickListener {
             if (showMore2Enabled) {
                 binding.instructionsTextView.maxLines = 5
-                // binding.showMore2TextView.text = "..."
-                //binding.showMore2TextView.visibility = View.VISIBLE
             } else {
                 binding.instructionsTextView.maxLines = Int.MAX_VALUE
-               // binding.showMore2TextView.visibility = View.INVISIBLE
             }
             showMore2Enabled = !showMore2Enabled
         }
@@ -108,50 +96,9 @@ class DetailActivity : AppCompatActivity() {
         binding.tagsTextView.text = recipe.tags.joinToString(", ")
         binding.mealTypeTextView.text = recipe.mealType.joinToString(" | ")
 
-
-
-
-
-        // Additional info
-//        binding.genreChip.text = recipe.genre
-//        when (recipe.platform) {
-//            "PC (Windows)" -> binding.platformButton.setIconResource(R.drawable.ic_desktop_windows)
-//            "Web Browser" -> binding.platformButton.setIconResource(R.drawable.ic_web)
-//        }
-
-        // Video
-/*        binding.trailerVideoView.setVideoURI("https://www.freetogame.com/g/${game.id}/videoplayback.webm".toUri())
-        binding.trailerVideoView.setOnPreparedListener {
-            CoroutineScope(Dispatchers.IO).launch {
-                delay(3000)
-                CoroutineScope(Dispatchers.Main).launch {
-                    binding.thumbnailImageView.visibility = View.GONE
-                    binding.trailerVideoView.start()
-                }
-            }
-        }
-
-        binding.trailerVideoView.setOnCompletionListener {
-            binding.thumbnailImageView.visibility = View.VISIBLE
-        }
-*/
         // Images
         Picasso.get().load(recipe.image).into(binding.thumbnailImageView)
-/*
-        val adapter = GalleryAdapter(recipe.screenshots, -1) { position ->
-            val intent = Intent(this, GalleryActivity::class.java)
-            intent.putExtra(GalleryActivity.EXTRA_SCREENSHOT_INDEX, position)
-            intent.putExtra(GalleryActivity.EXTRA_SCREENSHOTS_ARRAY, recipe.screenshots.map { it.image }.toTypedArray())
-            startActivity(intent)
-        }
-        binding.screenshotsRecyclerView.adapter = adapter
-        binding.screenshotsRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-*/
-        // Buttons
-//        binding.playButton.setOnClickListener {
-//            val browserIntent = Intent(Intent.ACTION_VIEW, recipe.recipeUrl.toUri())
-//            startActivity(browserIntent)
-//        }
+
         binding.shareButton.setOnClickListener {
             val sendIntent = Intent()
             sendIntent.setAction(Intent.ACTION_SEND)
@@ -162,12 +109,6 @@ class DetailActivity : AppCompatActivity() {
             startActivity(shareIntent)
         }
 
-        // Min system requirements
-//        binding.osTextView.text = recipe.minSystemRequirements?.os ?: "-----"
-//        binding.processorTextView.text = recipe.minSystemRequirements?.processor ?: "-----"
-//        binding.memoryTextView.text = recipe.minSystemRequirements?.memory ?: "-----"
-//        binding.graphicsTextView.text = recipe.minSystemRequirements?.graphics ?: "-----"
-//        binding.storageTextView.text = recipe.minSystemRequirements?.storage ?: "-----"
     }
 
 

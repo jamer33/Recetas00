@@ -46,8 +46,8 @@
                     android:layout_gravity="bottom|end"
                     android:layout_marginBottom="5dp"
                     android:layout_marginRight="5dp"
-
                     app:icon="@drawable/ic_share" />
+
 
             </FrameLayout>
 
