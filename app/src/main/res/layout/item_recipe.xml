@@ -20,7 +20,7 @@
             <ImageView
                 android:id="@+id/thumbnailImageView"
                 android:layout_width="match_parent"
-                android:layout_height="240dp"
+                android:layout_height="180dp"
                 tools:src="@drawable/ic_launcher_background"
                 android:scaleType="centerCrop"/>
 

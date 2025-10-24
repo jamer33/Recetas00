@@ -14,7 +14,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/buttonsLayout">
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -36,6 +36,18 @@
                     android:layout_height="240dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/bg_image_placeholder"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/shareButton"
+                    style="?attr/materialIconButtonFilledTonalStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:layout_gravity="bottom|end"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginRight="5dp"
+
+                    app:icon="@drawable/ic_share" />
 
             </FrameLayout>
 
@@ -90,7 +102,7 @@
                         style="?attr/materialIconButtonFilledStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:clickable="false"
+                        tools:text=" 340 min -> 120 + 110 + 30"
                         app:icon="@drawable/ic_timer" />
 
 
@@ -125,7 +137,7 @@
                     android:textSize="18sp"
                     tools:text="Lista de ingredientes"
                     android:ellipsize="end"
-                    android:maxLines="5"/>
+                    android:maxLines="2"/>
 
                 <TextView
                     android:id="@+id/showMoreTextView"
@@ -136,7 +148,50 @@
                     android:textColor="@color/md_theme_primary"
                     android:paddingVertical="8dp"/>
 
-            </LinearLayout>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardViewInstrucciones"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardElevation="3dp"
+                    app:cardCornerRadius="12dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginBottom="6dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="5dp"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="5dp"
+                        android:orientation="vertical">
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Paso a paso"
+                        style="@style/SectionTitle"/>
+
+                    <TextView
+                        android:id="@+id/instructionsTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        tools:text="Instrucciones"
+                        android:ellipsize="end"
+                        android:maxLines="5"
+                        android:paddingBottom="20dp"/>
+
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+
+        </LinearLayout>
 
             <com.google.android.material.divider.MaterialDivider
                 android:layout_width="match_parent"
@@ -144,37 +199,9 @@
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginVertical="16dp" />
 
-            <!-- Screenshots -->
-<!--            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingVertical="8dp">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Screenshots"
-                    style="@style/SectionTitle"
-                    android:layout_marginHorizontal="8dp"/>
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/screenshotsRecyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="160dp"
-                    tools:listitem="@layout/item_gallery"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    android:orientation="horizontal"/>
-
-            </LinearLayout>-->
-
-<!--            <com.google.android.material.divider.MaterialDivider
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginVertical="16dp" />-->
-
-            <!-- Min System Requirements -->
+            <!-- Más información -->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -208,7 +235,7 @@
                     style="@style/OtrosDatos.Label"/>
 
                 <TextView
-                    android:id="@+id/processorTextView"
+                    android:id="@+id/tagsTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:text="Chicken, Karahi, Main course, Indian, Pakistani, Asian"
@@ -221,7 +248,7 @@
                     style="@style/OtrosDatos.Label"/>
 
                 <TextView
-                    android:id="@+id/memoryTextView"
+                    android:id="@+id/mealTypeTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:text="Lunch, Dinner"
@@ -237,36 +264,6 @@
 
     </ScrollView>
 
-    <!-- Buttons -->
-
-    <LinearLayout
-        android:id="@+id/buttonsLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <Button
-            android:id="@+id/playButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_weight="1"
-            android:text="Play" />
-
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/shareButton"
-            style="?attr/materialIconButtonFilledTonalStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="false"
-            app:icon="@drawable/ic_share" />
-
-    </LinearLayout>
 
 
 

@@ -18,6 +18,7 @@ data class Recipe (
     @SerializedName("servings") val servings: Int,
     @SerializedName("difficulty") val difficulty: String,
     @SerializedName("cuisine") val cuisine: String,
+    @SerializedName("caloriesPerServing") val caloriesPerServing: Int,
     @SerializedName("tags") val tags: List<String>,
     @SerializedName("image") val image: String,
     @SerializedName("mealType") val mealType: List<String>

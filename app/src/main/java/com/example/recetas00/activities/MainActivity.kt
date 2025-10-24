@@ -2,8 +2,10 @@ package com.example.recetas00.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.GridLayoutManager
@@ -50,6 +52,29 @@ class MainActivity : AppCompatActivity() {
 
         getRecipeList()
     }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.activity_main_menu, menu)
+
+        val searchView = menu.findItem(R.id.action_search).actionView as SearchView
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                filteredRecipeList = originalRecipeList.filter { it.name.contains(newText, true) }
+                adapter.updateItems(filteredRecipeList)
+                return true
+            }
+        })
+
+        return true
+    }
+
+
+
 
     fun getRecipeList() {
         CoroutineScope(Dispatchers.IO).launch {

@@ -29,6 +29,7 @@ class DetailActivity : AppCompatActivity() {
     lateinit var recipe: Recipe
 
     var showMoreEnabled = false
+    var showMore2Enabled = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,9 +68,13 @@ class DetailActivity : AppCompatActivity() {
         // supportActionBar?.subtitle = recipe.developer
         binding.titleTextView.text = recipe.name
         binding.cuisineTextView.text = recipe.cuisine
+        binding.difficulty.text = recipe.difficulty
+
+        binding.cookTimeMinutes.text = " " + (recipe.cookTimeMinutes).toString() + " + " + (recipe.prepTimeMinutes).toString() + " + " + (recipe.servings).toString() + " min"
+        binding.ingredientsTextView.text = recipe.ingredients.joinToString("\n") { "● ${it}" }
         binding.showMoreTextView.setOnClickListener {
             if (showMoreEnabled) {
-                binding.ingredientsTextView.maxLines = 5
+                binding.ingredientsTextView.maxLines = 2
                 binding.showMoreTextView.text = "Ver más..."
             } else {
                 binding.ingredientsTextView.maxLines = Int.MAX_VALUE
@@ -77,6 +82,35 @@ class DetailActivity : AppCompatActivity() {
             }
             showMoreEnabled = !showMoreEnabled
         }
+        binding.instructionsTextView.text = recipe.instructions.mapIndexed { index, instruction -> "${index + 1}) $instruction" }.joinToString("\n\n")
+//        binding.showMore2TextView.setOnClickListener {
+//            if (showMore2Enabled) {
+//                binding.instructionsTextView.maxLines = 5
+//                binding.showMore2TextView.text = "Ver más..."
+//            } else {
+//                binding.instructionsTextView.maxLines = Int.MAX_VALUE
+//                binding.showMore2TextView.text = "Ver menos..."
+//            }
+//            showMore2Enabled = !showMore2Enabled
+//        }
+        binding.cardViewInstrucciones.setOnClickListener {
+            if (showMore2Enabled) {
+                binding.instructionsTextView.maxLines = 5
+                // binding.showMore2TextView.text = "..."
+                //binding.showMore2TextView.visibility = View.VISIBLE
+            } else {
+                binding.instructionsTextView.maxLines = Int.MAX_VALUE
+               // binding.showMore2TextView.visibility = View.INVISIBLE
+            }
+            showMore2Enabled = !showMore2Enabled
+        }
+        binding.caloriesPerServingTextView.text = recipe.caloriesPerServing.toString() + " Kcal"
+        binding.tagsTextView.text = recipe.tags.joinToString(", ")
+        binding.mealTypeTextView.text = recipe.mealType.joinToString(" | ")
+
+
+
+
 
         // Additional info
 //        binding.genreChip.text = recipe.genre

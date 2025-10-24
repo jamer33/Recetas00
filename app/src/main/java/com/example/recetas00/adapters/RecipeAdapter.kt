@@ -46,6 +46,7 @@ class RecipeViewHolder(val binding: ItemRecipeBinding) : RecyclerView.ViewHolder
         binding.nameTextView.text = recipe.name
         binding.difficulty.text = recipe.difficulty
         binding.cuisineTextView.text = recipe.cuisine
+        binding.cookTimeMinutes.text = " " + (recipe.cookTimeMinutes + recipe.prepTimeMinutes + recipe.servings).toString() + " min"
 //        when (recipe.platform) {
 //            "PC (Windows)" -> binding.platformButton.setIconResource(R.drawable.ic_desktop_windows)
 //            "Web Browser" -> binding.platformButton.setIconResource(R.drawable.ic_web)
