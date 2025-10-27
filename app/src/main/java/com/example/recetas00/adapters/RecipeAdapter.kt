@@ -55,7 +55,7 @@ class RecipeViewHolder(val binding: ItemRecipeBinding) : RecyclerView.ViewHolder
 //            "Web Browser" -> binding.platformButton.setIconResource(R.drawable.ic_web)
 
         val session = SessionManager(itemView.context)
-        if (session.isFavorite(recipe.id)) {
+        if (session.isFavoriteInt(recipe.id)) {
             binding.favoriteButton.visibility = View.VISIBLE
         } else {
             binding.favoriteButton.visibility = View.GONE

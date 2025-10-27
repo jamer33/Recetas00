@@ -115,7 +115,7 @@ class DetailActivity : AppCompatActivity() {
         }
 
         session = SessionManager(this)
-        isFavorite = session.isFavorite(recipe.id)
+        isFavorite = session.isFavoriteInt(recipe.id)
         setFavoriteIcon()
 
 
@@ -130,10 +130,10 @@ class DetailActivity : AppCompatActivity() {
 
     fun checkFavorite() {
         if (!isFavorite) {
-            session.setFavorite(recipe.id)
+            session.addFavoriteInt(recipe.id)
             Log.i("Favorite", "Marcado como favorita")
         } else {
-            session.setFavorite(-1)
+            session.removeFavoriteInt(recipe.id)
             Log.i("Favorite", "Eliminado como favorita")
         }
     }
