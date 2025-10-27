@@ -48,6 +48,19 @@
                     android:layout_marginRight="5dp"
                     app:icon="@drawable/ic_share" />
 
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/favoriteButton"
+                    style="?attr/materialIconButtonFilledTonalStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="5dp"
+                    app:icon="@drawable/ic_favorite_selected"
+                     />
+
+
+
 
             </FrameLayout>
 

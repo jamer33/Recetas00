@@ -2,6 +2,7 @@ package com.example.recetas00.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +19,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import androidx.core.content.ContextCompat
+import com.example.recetas00.utils.SessionManager
 
 class DetailActivity : AppCompatActivity() {
 
@@ -25,11 +28,14 @@ class DetailActivity : AppCompatActivity() {
         const val EXTRA_RECIPE_ID = "RECIPE_ID"
     }
     lateinit var binding: ActivityDetailBinding
+    lateinit var session: SessionManager
 
     lateinit var recipe: Recipe
 
     var showMoreEnabled = false
     var showMore2Enabled = false
+
+    var isFavorite = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,9 +49,7 @@ class DetailActivity : AppCompatActivity() {
         }
 
         val id=intent.getIntExtra(EXTRA_RECIPE_ID,-1)
-
         getRecipe(id)
-
     }
 
     fun getRecipe(id: Int) {
@@ -63,6 +67,9 @@ class DetailActivity : AppCompatActivity() {
     }
 
     fun loadData() {
+        // Images
+        Picasso.get().load(recipe.image).into(binding.thumbnailImageView)
+
         // Basic info
         supportActionBar?.title = recipe.name
         supportActionBar?.subtitle = recipe.cuisine
@@ -96,8 +103,6 @@ class DetailActivity : AppCompatActivity() {
         binding.tagsTextView.text = recipe.tags.joinToString(", ")
         binding.mealTypeTextView.text = recipe.mealType.joinToString(" | ")
 
-        // Images
-        Picasso.get().load(recipe.image).into(binding.thumbnailImageView)
 
         binding.shareButton.setOnClickListener {
             val sendIntent = Intent()
@@ -109,7 +114,41 @@ class DetailActivity : AppCompatActivity() {
             startActivity(shareIntent)
         }
 
+        session = SessionManager(this)
+        isFavorite = session.isFavorite(recipe.id)
+        setFavoriteIcon()
+
+
+        binding.favoriteButton.setOnClickListener {
+            checkFavorite()
+            isFavorite = !isFavorite
+            setFavoriteIcon()
+
+        }
+
     }
+
+    fun checkFavorite() {
+        if (!isFavorite) {
+            session.setFavorite(recipe.id)
+            Log.i("Favorite", "Marcado como favorita")
+        } else {
+            session.setFavorite(-1)
+            Log.i("Favorite", "Eliminado como favorita")
+        }
+    }
+
+
+    fun setFavoriteIcon() {
+        if (isFavorite) {
+            binding.favoriteButton.setIcon(ContextCompat.getDrawable(this, R.drawable.ic_favorite_selected))
+            Log.i("Favorite", "Es favorita: " + isFavorite.toString())
+        } else {
+            binding.favoriteButton.setIcon(ContextCompat.getDrawable(this, R.drawable.ic_favorite))
+            Log.i("Favorite", "No es favorita: " + isFavorite.toString())
+        }
+    }
+
 
 
 }
