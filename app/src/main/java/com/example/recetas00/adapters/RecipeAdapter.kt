@@ -1,11 +1,13 @@
 package com.example.recetas00.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recetas00.R
 import com.example.recetas00.data.Recipe
 import com.example.recetas00.databinding.ItemRecipeBinding
+import com.example.recetas00.utils.SessionManager
 import com.squareup.picasso.Picasso
 
 class RecipeAdapter(
@@ -43,6 +45,7 @@ class RecipeAdapter(
 class RecipeViewHolder(val binding: ItemRecipeBinding) : RecyclerView.ViewHolder(binding.root) {
 
     fun render(recipe: Recipe) {
+        Picasso.get().load(recipe.image).placeholder(R.drawable.bg_image_placeholder).into(binding.thumbnailImageView)
         binding.nameTextView.text = recipe.name
         binding.difficulty.text = recipe.difficulty
         binding.cuisineTextView.text = recipe.cuisine
@@ -50,7 +53,13 @@ class RecipeViewHolder(val binding: ItemRecipeBinding) : RecyclerView.ViewHolder
 //        when (recipe.platform) {
 //            "PC (Windows)" -> binding.platformButton.setIconResource(R.drawable.ic_desktop_windows)
 //            "Web Browser" -> binding.platformButton.setIconResource(R.drawable.ic_web)
+
+        val session = SessionManager(itemView.context)
+        if (session.isFavorite(recipe.id)) {
+            binding.favoriteButton.visibility = View.VISIBLE
+        } else {
+            binding.favoriteButton.visibility = View.GONE
+        }
 //        }
-        Picasso.get().load(recipe.image).placeholder(R.drawable.bg_image_placeholder).into(binding.thumbnailImageView)
     }
 }

@@ -73,6 +73,13 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        adapter.updateItems(filteredRecipeList)
+    }
+
+
 
 
 
