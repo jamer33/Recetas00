@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
@@ -20,6 +21,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import androidx.core.content.ContextCompat
+import com.example.recetas00.databinding.ItemMealTypeBinding
 import com.example.recetas00.utils.SessionManager
 
 class DetailActivity : AppCompatActivity() {
@@ -47,7 +49,7 @@ class DetailActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         val id=intent.getIntExtra(EXTRA_RECIPE_ID,-1)
         getRecipe(id)
     }
@@ -101,7 +103,17 @@ class DetailActivity : AppCompatActivity() {
         }
         binding.caloriesPerServingTextView.text = recipe.caloriesPerServing.toString() + " Kcal"
         binding.tagsTextView.text = recipe.tags.joinToString(", ")
-        binding.mealTypeTextView.text = recipe.mealType.joinToString(" | ")
+        //binding.mealTypeTextView.text = recipe.mealType.joinToString(" | ")
+
+        recipe.mealType.forEach { mealType ->
+            val chipBinding = ItemMealTypeBinding.inflate(layoutInflater, binding.mealTypeContainer, false)
+            chipBinding.mealTypeChip.text = mealType
+            chipBinding.mealTypeChip.setOnClickListener {
+                Toast.makeText(this, "Has pulsado ${mealType}", Toast.LENGTH_SHORT).show()
+            }
+            binding.mealTypeContainer.addView(chipBinding.root)
+        }
+
 
 
         binding.shareButton.setOnClickListener {
